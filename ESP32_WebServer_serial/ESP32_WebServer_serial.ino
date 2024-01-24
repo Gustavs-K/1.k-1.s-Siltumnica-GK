@@ -13,8 +13,8 @@ AsyncWebServer server(80);
 
 // USER SPECIFIED 
 // NETWORK CREDENTIALS
-const char* ssid = "REPLACE_WITH_WIFI_NAME";          // BUFALO24
-const char* password = "REPLACE_WITH_WIFI_PASSWORD";  // arnis070668
+const char* ssid = "REPLACE_WITH_WIFI_NAME";
+const char* password = "REPLACE_WITH_WIFI_PASSWORD";
 
 // VALVE POSITIONS IN DEGREESE
 #define VLV_POS_OPEN 0
