@@ -1,0 +1,191 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>ESP Input Form</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script>
+            function submitMessage() {
+                alert("Saved value to ESP SPIFFS");
+                setTimeout(function(){ document.location.reload(false); }, 500);
+            }
+        </script>
+        <style>
+            
+            body{
+                background-color: #0A1802;
+                font-family: 'Courier Prime';
+                font-weight: 700;
+            }
+            summary{
+                width: 260px;
+                height: 20px;
+                cursor: pointer;
+                background-color: #A7E587;
+                color: #0A1802;
+                border: 2px solid #77D441;
+                margin: 10px;
+                margin-left: 10px;
+                padding: 20px;
+                border-radius: 16px;
+            }
+            form{
+                width: 470px;
+                height: auto;
+                background-color: #1D8A6E;
+                color: #0A1802;
+                border: 2px solid #77D441;
+                margin: 10px;
+                margin-left: 30px;
+                padding: 10px;
+                border-radius: 16px;            
+            }
+            form.Output-form{
+                width: 520px;
+                height: auto;
+                font-size:larger;
+                margin-left: 10px;
+            }
+            input{
+                color: #37ffcd;
+                background-color: #0A1802;
+                border: 2px solid #77D441;
+                margin-bottom: 4px;
+            }
+            input.Input-box{
+                width: 250px;
+            }
+            input.Output-box{
+                width: auto;
+                margin-left: -7px;
+                margin-right: -5px;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- OUTPUTS -->
+        <form class="Output-form">
+            Current Inside Air Temp: <input type="text" disabled value="%CrntTemp%" class="Output-box" name="CrntTemp"> C <br> Target: %TrgtTemp% C
+        </form><br>
+
+        <form class="Output-form">
+            Current Inside Air Humid: <input type="text" disabled value="%CrntHumid%" class="Output-box" name="CrntHumid"> perc. <br> Target: %TrgtHumid% perc.
+        </form><br>
+
+        <form class="Output-form">
+            LED state: <input type="text" disabled value="%CrntLED%" class="Output-box" name="CrntLED"> <br> OFF(0) / ON(1) / OFF FORCED(2) / ON FORCED(3)
+        </form><br>
+
+        <form class="Output-form">
+            Fan state: <input type="text" disabled value="%CrntFan%" class="Output-box" name="CrntFan"> <br> OFF(0) / ON(1) / OFF FORCED(2) / ON FORCED(3)
+        </form><br>
+
+        <form class="Output-form">
+            Heater state: <input type="text" disabled value="%CrntHeat%" class="Output-box" name="CrntHeat"> <br> OFF(0) / ON(1) / OFF FORCED(2) / ON FORCED(3)
+        </form><br>
+
+        <form class="Output-form">
+            Valve state: <input type="text" disabled value="%CrntVLV%" class="Output-box" name="CrntVLV"> <br> CLOSED(0) / OPEN(1) / CLOSED F.(2) / OPEN F.(3)
+        </form><br>
+
+        <form class="Output-form">
+            Time to next pour: <input type="text" disabled value="%TimeToNextPour%" class="Output-box" name="TimeToNextPour"> ms
+        </form><br>
+
+        <form class="Output-form">
+            Water timer length: <input type="text" disabled value="%TrgtWTL%" class="Output-box" name="CrntWTL"> ms
+        </form><br>
+
+        <form class="Output-form">
+            LED time till ON: <input type="text" disabled value="%TimeToLedON%" class="Output-box" name="TimeToLedON"> ms
+        </form><br>
+
+        <form class="Output-form">
+            LED time till OFF: <input type="text" disabled value="%TimeToLedOFF%" class="Output-box" name="TimeToLedOFF"> ms
+        </form><br>
+
+        <form class="Output-form">
+            LED ON length: <input type="text" disabled value="%TrgtLedONl%" class="Output-box" name="TrgtLedONl"> ms
+        </form><br>
+
+        <form class="Output-form">
+            LED OFF length: <input type="text" disabled value="%TrgtLedOFFl%" class="Output-box" name="TrgtLedOFFl"> ms
+        </form><br>
+
+        <form class="Output-form">
+            Time since StartUp: <input type="text" disabled value="%CrntUpTime%" class="Output-box" name="CrntUpTime"> ms <br> 
+        </form><br>
+
+        <!-- INPUTS -->
+        <details>
+            <summary class="pointer">Click to open inputs</summary>
+            <span>
+                <form action="/get" target="hidden-form">
+                    Target Air Temp: <input type="number" value="%TrgtTemp%" class="Input-box" placeholder="5 - 40C" min="5" max="40" name="TrgtTemp"> C <br> (5 - 40C)
+                    <input type="submit" value="Submit" onclick="submitMessage()">
+                </form><br>
+
+                <form action="/get" target="hidden-form">
+                    Target Air Humid: <input type="number" value="%TrgtHumid%" class="Input-box" placeholder="10 - 90 perc." min="10" max="90" name="TrgtHumid"> perc. <br> (10 - 90 perc.)
+                    <input type="submit" value="Submit" onclick="submitMessage()">
+                </form><br>
+
+                <form action="/get" target="hidden-form">
+                    Water Amount per Pour: <input type="number" value="%TrgtWPP%" class="Input-box" placeholder="0 - 100000 ml" min="0" max="100000" name="TrgtWPP"> ml <br> (0 - 100000 ml)
+                    <input type="submit" value="Submit" onclick="submitMessage()">
+                </form><br>
+
+                <form action="/get" target="hidden-form">
+                    Water Timer Length: <input type="number" value="%TrgtWTL%" class="Input-box" placeholder="0 - 2bil ms" min="0" max="2000000000" name="TrgtWTL"> ms <br> (0 - 2bil ms)
+                    <input type="submit" value="Submit" onclick="submitMessage()">
+                </form><br>
+
+                <form action="/get" target="hidden-form">
+                    LED ON Length: <input type="number" value="%TrgtLedONl%" class="Input-box" placeholder="0 - 2bil ms" min="0" max="2000000000" name="TrgtLedONl"> ms <br> (0 - 2bil ms)
+                    <input type="submit" value="Submit" onclick="submitMessage()">
+                </form><br>
+
+                <form action="/get" target="hidden-form">
+                    LED OFF Length: <input type="number" value="%TrgtLedOFFl%" class="Input-box" placeholder="0 - 2bil ms" min="0" max="2000000000" name="TrgtLedOFFl"> ms <br> (0 - 2bil ms)
+                    <input type="submit" value="Submit" onclick="submitMessage()">
+                </form><br>
+                
+                <form action="/get" target="hidden-form">
+                    Force LED state: <input type="number" value="%CrntLED%" class="Input-box" placeholder="OFF(0) / ON(1) / OFF FORCED(2) / ON FORCED(3)" min="0" max="3" name="CrntLED"> <br> (OFF(0) / ON(1) / OFF FORCED(2) / ON FORCED(3)) <br> 
+                    <input type="submit" value="Submit" onclick="submitMessage()">
+                </form><br>
+
+                <form action="/get" target="hidden-form">
+                    Force Fan state: <input type="number" value="%CrntFan%" class="Input-box" placeholder="OFF(0) / ON(1) / OFF FORCED(2) / ON FORCED(3)" min="0" max="3" name="CrntFan"> <br> (OFF(0) / ON(1) / OFF FORCED(2) / ON FORCED(3)) <br> 
+                    <input type="submit" value="Submit" onclick="submitMessage()">
+                </form><br>
+
+                <form action="/get" target="hidden-form">
+                    Force Heater state: <input type="number" value="%CrntHeat%" class="Input-box" placeholder="OFF(0) / ON(1) / OFF FORCED(2) / ON FORCED(3)" min="0" max="3" name="CrntHeat"> <br> (OFF(0) / ON(1) / OFF FORCED(2) / ON FORCED(3)) <br> 
+                    <input type="submit" value="Submit" onclick="submitMessage()">
+                </form><br>
+
+                <form action="/get" target="hidden-form">
+                    Force Valve state: <input type="number" value="%CrntVLV%" class="Input-box" placeholder="CLOSED(0) / OPEN(1) / CLOSED F.(2) / OPEN F.(3)" min="0" max="3" name="CrntVLV"> <br> CLOSED(0) / OPEN(1) / CLOSED F.(2) / OPEN F.(3) <br> 
+                    <input type="submit" value="Submit" onclick="submitMessage()">
+                </form><br>
+
+                <form action="/get" target="hidden-form">
+                    Force Water timer reset: <input type="number" value="%FrcWTR%" class="Input-box" placeholder="Type 1 and press GO" min="0" max="1" name="FrcWTR"> <br> (Type 1 and press GO)
+                    <input type="submit" value="GO" onclick="submitMessage()">
+                </form>
+
+                <form action="/get" target="hidden-form">
+                    Force LED time till ON reset: <input type="number" value="%FrcLedTTOnR%" class="Input-box" placeholder="Type 1 and press GO" min="0" max="1" name="FrcLedTTOnR"> <br> (Type 1 and press GO)
+                    <input type="submit" value="GO" onclick="submitMessage()">
+                </form>
+
+                <form action="/get" target="hidden-form">
+                    Force LED time till OFF reset: <input type="number" value="%FrcLedTTOffR%" class="Input-box" placeholder="Type 1 and press GO" min="0" max="1" name="FrcLedTTOffR"> <br> (Type 1 and press GO)
+                    <input type="submit" value="GO" onclick="submitMessage()">
+                </form>
+
+            </span>
+        </details>
+        <iframe style="display:none" name="hidden-form"></iframe>
+    </body>
+</html>
